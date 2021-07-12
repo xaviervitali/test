@@ -1,27 +1,39 @@
-
-
-<div class="container d-flex flex-wrap justify-content-around ">
-
-
-  <div *ngFor="let game of gamesList" class="text-center col-4" >
-    
-    <h3>{{ game.name }}</h3>
-  <img src="{{game.background_image}}" alt=""  style="width: 100%; height: 200px; object-fit: cover;">
-    <p>Sortie le {{game.released.split("-").reverse().join("/") }}</p>
-    <p>{{ game.rating }} ({{game.ratings[0].title }})</p>
-    <ul >
-    <li *ngFor="let genre of game.genres">{{ genre.name }}</li> 
-    </ul>
-
+<div class="container">
+  <div class="d-flex justify-content-around flex-wrap">
+    <div
+      class="card m-2"
+      style="width: 18rem"
+      *ngFor="let game of getApi(currentPage)"
+    >
+      <img
+        class="card-img-top"
+        src="{{ game.background_image }}"
+        alt="{{ game.name }}"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ game.name }}</h5>
+        <div class="card-text">
+          <div>
+            Sortie le : {{ game.released.split("-").reverse().join("/") }}
+          </div>
+          <div>{{ game.rating }} ({{ game.ratings[0].title }})</div>
+          <div>
+            <ul>
+              <li *ngFor="let genre of game.genres">{{ genre.name }}</li>
+            </ul>
+          </div>
+        </div>
+        <a href="/game/{{ game.id }}" class="btn btn-primary"
+          >Voir la fiche du Jeu</a
+        >
+      </div>
+    </div>
   </div>
-
+  <app-pagination
+    [currentPage]="currentPage"
+    [items]="gamesCount"
+    [itemsPerPage]="itemsPerPage"
+    (pageChange)="currentPage = $event"
+  >
+  </app-pagination>
 </div>
-
-
-
-<app-pagination 
-[currentPage]="currentPage" 
-[items]="40" 
-[itemsPerPage]="itemsPerPage"
-(pageChange)="currentPage=$event" >
-</app-pagination>

@@ -1,1 +1,20 @@
-<p>game-view works!</p>
+<div class="container">
+  <div class="d-flex flex-column">
+    <div class="m-3 d-flex justify-content-around align-items-center">
+      <img
+        src="{{ game.background_image }}"
+        alt="{{ game.name }}"
+        style="width: 50%"
+      />
+      <h1 class="text-center">
+        {{ game.name }}
+      </h1>
+    </div>
+    <p>Sortie le : {{ released }}</p>
+    <p>Dispo sur : {{ plateform }}</p>
+    <p>
+      <span [innerHTML]="game.description"></span>
+    </p>
+    <p>Tags : {{ tags }}</p>
+  </div>
+</div>

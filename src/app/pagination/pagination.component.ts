@@ -15,19 +15,19 @@ import {
 })
 export class PaginationComponent implements OnInit, OnChanges {
   @Input()
-  currentPage = 1;
+  currentPage = 10;
   @Input()
   items: number;
   @Input()
-  itemsPerPage = 20;
+  itemsPerPage = 10;
   @Output()
   pageChange = new EventEmitter<number>();
 
   pages = [];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChange | any) {
     if (!changes.items) {
@@ -40,6 +40,7 @@ export class PaginationComponent implements OnInit, OnChanges {
       this.pages.push(i);
     }
   }
+
   handlePageClick(pageNumber: number) {
     this.pageChange.emit(pageNumber);
   }
